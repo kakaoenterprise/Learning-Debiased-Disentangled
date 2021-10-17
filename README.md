@@ -131,8 +131,8 @@ bash scripts/run_bffhq_vanilla.sh
 ```
 
 ### Pretrained Models
-[CMNIST 0.5pct]()
-[CMNIST 1pct]()
+[CMNIST 0.5pct]() <br>
+[CMNIST 1pct]() <br>
 [CMNIST 2pct]()
 [CMNIST 5pct]()
 
