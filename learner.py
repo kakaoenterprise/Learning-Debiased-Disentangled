@@ -17,8 +17,8 @@ from util import EMA
 class Learner(object):
     def __init__(self, args):
         data2model = {'cmnist': "MLP",
-                           'cifar10c': "ResNet18",
-                           'bffhq': "ResNet18"}
+                       'cifar10c': "ResNet18",
+                       'bffhq': "ResNet18"}
 
         data2batch_size = {'cmnist': 256,
                            'cifar10c': 256,
@@ -353,23 +353,25 @@ class Learner(object):
             self.writer.add_scalar(f"loss/loss_swap_align",    loss_swap_align, step)
             self.writer.add_scalar(f"loss/loss",               (loss_dis_conflict + loss_dis_align) + lambda_swap * (loss_swap_conflict + loss_swap_align), step)
 
-    def board_vanilla_acc(self, step, epoch):
-        valid_attrwise_accs_b = self.evaluate(self.model_b, self.valid_loader)
-        test_attrwise_accs_b = self.evaluate_test(self.model_b, self.test_loader)
-
-        test_accs_b = torch.mean(test_attrwise_accs_b)
+    def board_vanilla_acc(self, step, epoch, inference=None):
+        valid_accs_b = self.evaluate(self.model_b, self.valid_loader)
+        test_accs_b = self.evaluate_test(self.model_b, self.test_loader)
+        if inference:
+            print(f'valid acc: {valid_accs_d} || test acc: {test_accs_d}')
+            import sys
+            sys.exit(0)
 
         print(f'epoch: {epoch}')
 
-        if valid_attrwise_accs_b >= self.best_valid_acc_b:
-            self.best_valid_acc_b = valid_attrwise_accs_b
+        if valid_accs_b >= self.best_valid_acc_b:
+            self.best_valid_acc_b = valid_accs_b
         if test_accs_b >= self.best_test_acc_b:
             self.best_test_conflict_acc_b = test_conflict_accs_b
             self.save_vanilla(step, best=True)
 
         if self.args.wandb:
             wandb.log({
-                "acc_b_valid": valid_attrwise_accs_b,
+                "acc_b_valid": valid_accs_b,
                 "acc_b_test": test_accs_b,
             },
                 step=step,)
@@ -379,32 +381,34 @@ class Learner(object):
             },
                 step=step, )
 
-        print(f'valid_b: {valid_attrwise_accs_b} || test_b: {test_accs_b} || test_conflict_b: {test_conflict_accs_b}')
+        print(f'valid_b: {valid_accs_b} || test_b: {test_accs_b}')
 
         if self.args.tensorboard:
-            self.writer.add_scalar(f"acc/acc_b_valid", valid_attrwise_accs_b, step)
+            self.writer.add_scalar(f"acc/acc_b_valid", valid_accs_b, step)
             self.writer.add_scalar(f"acc/acc_b_test", test_accs_b, step)
 
             self.writer.add_scalar(f"acc/best_acc_b_valid", self.best_valid_acc_b, step)
             self.writer.add_scalar(f"acc/best_acc_b_test", self.best_test_acc_b, step)
 
 
-    def board_ours_acc(self, step):
+    def board_ours_acc(self, step, inference=None):
         # check label network
-        valid_attrwise_accs_d = self.evaluate_ours(self.model_b, self.model_l, self.valid_loader, model='label')
-        test_attrwise_accs_d = self.evaluate_ours_test(self.model_b, self.model_l, self.test_loader, model='label')
+        valid_accs_d = self.evaluate_ours(self.model_b, self.model_l, self.valid_loader, model='label')
+        test_accs_d = self.evaluate_ours_test(self.model_b, self.model_l, self.test_loader, model='label')
+        if inference:
+            print(f'test acc: {test_accs_d.item()}')
+            import sys
+            sys.exit(0)
 
-        test_accs_d = torch.mean(test_attrwise_accs_d)
-
-        if valid_attrwise_accs_d >= self.best_valid_acc_d:
-            self.best_valid_acc_d = valid_attrwise_accs_d
+        if valid_accs_d >= self.best_valid_acc_d:
+            self.best_valid_acc_d = valid_accs_d
         if test_accs_d >= self.best_test_acc_d:
             self.best_test_acc_d = test_accs_d
             self.save_ours(step, best=True)
 
         if self.args.wandb:
             wandb.log({
-                "acc_d_valid": valid_attrwise_accs_d,
+                "acc_d_valid": valid_accs_d,
                 "acc_d_test": test_accs_d,
             },
                 step=step, )
@@ -415,13 +419,13 @@ class Learner(object):
                 step=step, )
 
         if self.args.tensorboard:
-            self.writer.add_scalar(f"acc/acc_d_valid", valid_attrwise_accs_d, step)
+            self.writer.add_scalar(f"acc/acc_d_valid", valid_accs_d, step)
             self.writer.add_scalar(f"acc/acc_d_test", test_accs_d, step)
 
             self.writer.add_scalar(f"acc/best_acc_d_valid", self.best_valid_acc_d, step)
             self.writer.add_scalar(f"acc/best_acc_d_test", self.best_test_acc_d, step)
 
-        print(f'valid_d: {valid_attrwise_accs_d} || test_d: {test_accs_d} ')
+        print(f'valid_d: {valid_accs_d} || test_d: {test_accs_d} ')
 
     def concat_dummy(self, z):
         def hook(model, input, output):
@@ -666,3 +670,16 @@ class Learner(object):
                 print(f'finished epoch: {epoch}')
                 epoch += 1
                 cnt = 0
+
+    def test_ours(self, args):
+        if args.dataset == 'cmnist':
+            self.model_l = get_model('mlp_DISENTANGLE', self.num_classes).to(self.device)
+            self.model_b = get_model('mlp_DISENTANGLE', self.num_classes).to(self.device)
+        else:
+            self.model_l = get_model('resnet_DISENTANGLE', self.num_classes).to(self.device)
+            self.model_b = get_model('resnet_DISENTANGLE', self.num_classes).to(self.device)
+
+        self.model_l.load_state_dict(torch.load(os.path.join(args.pretrained_path, 'best_model_l.th'))['state_dict'])
+        self.model_b.load_state_dict(torch.load(os.path.join(args.pretrained_path, 'best_model_b.th'))['state_dict'])
+        self.board_ours_acc(step=0, inference=True)
+

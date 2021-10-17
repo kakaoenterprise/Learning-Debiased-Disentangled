@@ -13,7 +13,7 @@ if __name__ == '__main__':
     parser.add_argument("--weight_decay",help='weight_decay',default=0.0, type=float)
     parser.add_argument("--momentum",help='momentum',default=0.9, type=float)
     parser.add_argument("--num_workers", help="workers number", default=16, type=int)
-    parser.add_argument("--exp", help='experiment name', default='debugging', type=str)
+    parser.add_argument("--exp", help='experiment name', default='Test', type=str)
     parser.add_argument("--device", help="cuda or cpu", default='cuda', type=str)
     parser.add_argument("--num_steps", help="# of iterations", default= 500 * 100, type=int)
     parser.add_argument("--target_attr_idx", help="target_attr_idx", default= 0, type=int)
@@ -35,8 +35,8 @@ if __name__ == '__main__':
     parser.add_argument("--model", help="which network, [MLP, ResNet18, ResNet20, ResNet50]", default= 'MLP', type=str)
 
     # logging
-    parser.add_argument("--log_dir", help='path for saving model', default='./log', type=str)
-    parser.add_argument("--data_dir", help='path for loading data', default='dataset', type=str)
+    parser.add_argument("--log_dir", help='path for loading data', default='./log', type=str)
+    parser.add_argument("--data_dir", help='path for saving models & logs', default='dataset', type=str)
     parser.add_argument("--valid_freq", help='frequency to evaluate on valid/test set', default=500, type=int)
     parser.add_argument("--log_freq", help='frequency to log on tensorboard', default=500, type=int)
     parser.add_argument("--save_freq", help='frequency to save model checkpoint', default=1000, type=int)
@@ -44,8 +44,7 @@ if __name__ == '__main__':
     parser.add_argument("--tensorboard", action="store_true", help="whether to use tensorboard")
 
     # experiment
-    parser.add_argument("--train_ours", action="store_true", help="whether to train our method")
-    parser.add_argument("--train_vanilla", action="store_true", help="whether to train vanilla")
+    parser.add_argument("--pretrained_path", help="path for pretrained model", type=str)
 
     args = parser.parse_args()
 
@@ -54,13 +53,6 @@ if __name__ == '__main__':
 
     # actual training
     print('Official Pytorch Code of "Learning Debiased Representation via Disentangled Feature Augmentation (NeurIPS 21 Oral)"')
-    print('Training starts ...')
+    print('Test starts ...')
 
-    if args.train_ours:
-        learner.train_ours(args)
-    elif args.train_vanilla:
-        learner.train_vanilla(args)
-    else:
-        print('choose one of the two options ...')
-        import sys
-        sys.exit(0)
+    learner.test_ours(args)
