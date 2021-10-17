@@ -136,7 +136,7 @@ In order to test our pretrained models, run the following command.
 python test.py --pretrained_path=<path_to_pretrained_ckpt> --dataset=<dataset_to_test> --percent=<percent_to_test>
 ```
 
-We provide the pretrained models in the following urls.
+We provide the pretrained models in the following urls. <br>
 [CMNIST 0.5pct](https://drive.google.com/drive/folders/1HkbPXRShFcQMvkdXqc_ls2lEe8AKnx9k?usp=sharing) <br>
 [CMNIST 1pct](https://drive.google.com/drive/folders/13myN-8IXJZXIydat9ou2R8hrofN6Fpjq?usp=sharing) <br>
 [CMNIST 2pct](https://drive.google.com/drive/folders/1zGVY4A0VUF1B_2LAGFK8WGq6lZ9UbGbE?usp=sharing) <br>
