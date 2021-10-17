@@ -133,13 +133,13 @@ bash scripts/run_bffhq_vanilla.sh
 ### Pretrained Models
 [CMNIST 0.5pct]() <br>
 [CMNIST 1pct]() <br>
-[CMNIST 2pct]()
-[CMNIST 5pct]()
+[CMNIST 2pct]() <br>
+[CMNIST 5pct]() <br>
 
-[CIFAR10C 0.5pct]()
-[CIFAR10C 1pct]()
-[CIFAR10C 2pct]()
-[CIFAR10C 5pct]()
+[CIFAR10C 0.5pct]() <br>
+[CIFAR10C 1pct]() <br>
+[CIFAR10C 2pct]() <br>
+[CIFAR10C 5pct]() <br>
 
 [BFFHQ 0.5pct]()
 
