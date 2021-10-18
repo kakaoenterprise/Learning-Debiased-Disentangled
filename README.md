@@ -29,9 +29,9 @@ By utilizing these diversified bias-conflicting features during the training, ou
 ### Installation
 Clone this repository.
 ```
-git clone https://github.com/kakaoenterprise/NeurIPS2021/Learning-Debiased-Disentangled.git
+git clone https://github.com/kakaoenterprise/Learning-Debiased-Disentangled.git
 cd Learning-Debiased-Disentangled
-pip install -r requirements
+pip install -r requirements.txt
 ```
 ### Datasets
 We used three datasets in our paper. 
@@ -162,6 +162,6 @@ Bibtex coming soon!
 [Kakao Enterprise/Vision Team](mailto:vision.research@kakaoenterprise.com)
 
 ### Acknowledgments
-This work was mainly done when both of the first authors were doing internship at Kakao Enterprise, AI Lab. 
+This work was mainly done when both of the first authors were doing internship at Vision Team/AI Lab/Kakao Enterprise. 
 Our pytorch implementation is based on [LfF](https://github.com/alinlab/LfF).
 Thanks for the implementation.
