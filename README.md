@@ -34,7 +34,7 @@ Clone this repository.
 ```
 git clone https://github.com/kakaoenterprise/NeurIPS2021/Learning-Debiased-Disentangled.git
 cd Learning-Debiased-Disentangled
-pip install -r requirements
+pip install -r requirements.txt
 ```
 ### Datasets
 We used three datasets in our paper. 
