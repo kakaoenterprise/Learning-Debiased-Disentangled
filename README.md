@@ -32,7 +32,7 @@ Juyoung Lee [[Website]](https://sites.google.com/view/juyoung-lee) (Kakao Enterp
 ### Installation
 Clone this repository.
 ```
-git clone https://github.com/kakaoenterprise/NeurIPS2021/Learning-Debiased-Disentangled.git
+git clone https://github.com/kakaoenterprise/Learning-Debiased-Disentangled.git
 cd Learning-Debiased-Disentangled
 pip install -r requirements.txt
 ```
