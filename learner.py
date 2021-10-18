@@ -357,7 +357,7 @@ class Learner(object):
         valid_accs_b = self.evaluate(self.model_b, self.valid_loader)
         test_accs_b = self.evaluate_test(self.model_b, self.test_loader)
         if inference:
-            print(f'valid acc: {valid_accs_d} || test acc: {test_accs_d}')
+            print(f'valid acc: {valid_accs_b} || test acc: {test_accs_b}')
             import sys
             sys.exit(0)
 
@@ -366,7 +366,7 @@ class Learner(object):
         if valid_accs_b >= self.best_valid_acc_b:
             self.best_valid_acc_b = valid_accs_b
         if test_accs_b >= self.best_test_acc_b:
-            self.best_test_conflict_acc_b = test_conflict_accs_b
+            self.best_test_acc_b = test_accs_b
             self.save_vanilla(step, best=True)
 
         if self.args.wandb:
@@ -421,7 +421,6 @@ class Learner(object):
         if self.args.tensorboard:
             self.writer.add_scalar(f"acc/acc_d_valid", valid_accs_d, step)
             self.writer.add_scalar(f"acc/acc_d_test", test_accs_d, step)
-
             self.writer.add_scalar(f"acc/best_acc_d_valid", self.best_valid_acc_d, step)
             self.writer.add_scalar(f"acc/best_acc_d_test", self.best_test_acc_d, step)
 
