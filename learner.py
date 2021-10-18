@@ -421,7 +421,6 @@ class Learner(object):
         if self.args.tensorboard:
             self.writer.add_scalar(f"acc/acc_d_valid", valid_accs_d, step)
             self.writer.add_scalar(f"acc/acc_d_test", test_accs_d, step)
-
             self.writer.add_scalar(f"acc/best_acc_d_valid", self.best_valid_acc_d, step)
             self.writer.add_scalar(f"acc/best_acc_d_test", self.best_test_acc_d, step)
 

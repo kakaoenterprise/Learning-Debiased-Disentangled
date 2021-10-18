@@ -24,7 +24,9 @@ By utilizing these diversified bias-conflicting features during the training, ou
 </p>
 
 ## Code Contributors
-[Jungsoo Lee](https://leebebeto.github.io/) (KAIST AI, Kakao Enterprise), [Eungyeup Kim](https://eungyeupkim.github.io/) (KAIST AI, Kakao Enterprise), Juyoung Lee (Kakao Enterprise)
+Jungsoo Lee [[Website]](https://leebebeto.github.io/) [[LinkedIn]](https://www.linkedin.com/in/jungsoo-lee-52103a17a/) [[Google Scholar]](https://scholar.google.com/citations?user=qSGLUDQAAAAJ&hl=ko) (KAIST AI, Kakao Enterprise) <br>
+Eungyeup Kim [[Website]](https://eungyeupkim.github.io/) [[LinkedIn]](https://www.linkedin.com/in/eungyeup-kim-815718165/) [[Google Scholar]](https://scholar.google.com/citations?user=RtxkcwYAAAAJ&hl=en) (KAIST AI, Kakao Enterprise) <br>
+Juyoung Lee [[Website]](https://sites.google.com/view/juyoung-lee) (Kakao Enterprise)
 
 ## Pytorch Implementation
 ### Installation
@@ -42,7 +44,7 @@ We used three datasets in our paper.
 </p>
 
 Download the datasets with the following [url](https://drive.google.com/drive/folders/1JEOqxrhU_IhkdcRohdbuEtFETUxfNmNT?usp=sharing).
-Note that BFFHQ is the dataset used in "BiaSwap: Removing Dataset Bias with Bias-Tailored Swapping Augmentation" (Kim and Lee et al., ICCV 2021).
+Note that BFFHQ is the dataset used in "BiaSwap: Removing Dataset Bias with Bias-Tailored Swapping Augmentation" (Kim et al., ICCV 2021).
 Unzip the files and the directory structures will be as following:
 ```
 cmnist
@@ -71,10 +73,10 @@ bffhq
 #### CMNIST
 ##### Vanilla
 ```
-python train.py --dataset cmnist --exp=cmnist_0.5_vanilla --lr=0.01 --percent=0.5pct --train_vanilla --tensorboard
-python train.py --dataset cmnist --exp=cmnist_1_vanilla --lr=0.01 --percent=1pct --train_vanilla --tensorboard
-python train.py --dataset cmnist --exp=cmnist_2_vanilla --lr=0.01 --percent=2pct --train_vanilla --tensorboard
-python train.py --dataset cmnist --exp=cmnist_5_vanilla --lr=0.01 --percent=5pct --train_vanilla --tensorboard
+python train.py --dataset cmnist --exp=cmnist_0.5_vanilla --lr=0.01 --percent=0.5pct --train_vanilla --tensorboard --wandb
+python train.py --dataset cmnist --exp=cmnist_1_vanilla --lr=0.01 --percent=1pct --train_vanilla --tensorboard --wandb
+python train.py --dataset cmnist --exp=cmnist_2_vanilla --lr=0.01 --percent=2pct --train_vanilla --tensorboard --wandb
+python train.py --dataset cmnist --exp=cmnist_5_vanilla --lr=0.01 --percent=5pct --train_vanilla --tensorboard --wandb
 ```
 ```
 bash scripts/run_cmnist_vanilla.sh
@@ -82,10 +84,10 @@ bash scripts/run_cmnist_vanilla.sh
 
 ##### Ours
 ```
-python train.py --dataset cmnist --exp=cmnist_0.5_ours --lr=0.01 --percent=0.5pct --curr_step=10000 --lambda_dis_align=10 --lambda_swap_align=10 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
-python train.py --dataset cmnist --exp=cmnist_1_ours --lr=0.01 --percent=1pct --curr_step=10000 --lambda_dis_align=10 --lambda_swap_align=10 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
-python train.py --dataset cmnist --exp=cmnist_2_ours --lr=0.01 --percent=2pct --curr_step=10000 --lambda_dis_align=10 --lambda_swap_align=10 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
-python train.py --dataset cmnist --exp=cmnist_5_ours --lr=0.01 --percent=5pct --curr_step=10000 --lambda_dis_align=10 --lambda_swap_align=10 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
+python train.py --dataset cmnist --exp=cmnist_0.5_ours --lr=0.01 --percent=0.5pct --curr_step=10000 --lambda_swap=1 --lambda_dis_align=10 --lambda_swap_align=10 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard --wandb
+python train.py --dataset cmnist --exp=cmnist_1_ours --lr=0.01 --percent=1pct  --curr_step=10000 --lambda_swap=1 --lambda_dis_align=10 --lambda_swap_align=10 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard --wandb
+python train.py --dataset cmnist --exp=cmnist_2_ours --lr=0.01 --percent=2pct  --curr_step=10000 --lambda_swap=1 --lambda_dis_align=10 --lambda_swap_align=10 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard --wandb
+python train.py --dataset cmnist --exp=cmnist_5_ours --lr=0.01 --percent=5pct  --curr_step=10000 --lambda_swap=1 --lambda_dis_align=10 --lambda_swap_align=10 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard --wandb
 ```
 ```
 bash scripts/run_cmnist_ours.sh
@@ -94,10 +96,10 @@ bash scripts/run_cmnist_ours.sh
 #### Corrupted CIFAR10
 ##### Vanilla
 ```
-python train.py --dataset cifar10c --exp=cifar10c_0.5_vanilla --lr=0.001 --percent=0.5pct --train_vanilla --tensorboard
-python train.py --dataset cifar10c --exp=cifar10c_1_vanilla --lr=0.001 --percent=1pct --train_vanilla --tensorboard
-python train.py --dataset cifar10c --exp=cifar10c_2_vanilla --lr=0.001 --percent=2pct --train_vanilla --tensorboard
-python train.py --dataset cifar10c --exp=cifar10c_5_vanilla --lr=0.001 --percent=5pct --train_vanilla --tensorboard
+python train.py --dataset cifar10c --exp=cifar10c_0.5_vanilla --lr=0.001 --percent=0.5pct --train_vanilla --tensorboard --wandb
+python train.py --dataset cifar10c --exp=cifar10c_1_vanilla --lr=0.001 --percent=1pct --train_vanilla --tensorboard --wandb
+python train.py --dataset cifar10c --exp=cifar10c_2_vanilla --lr=0.001 --percent=2pct --train_vanilla --tensorboard --wandb
+python train.py --dataset cifar10c --exp=cifar10c_5_vanilla --lr=0.001 --percent=5pct --train_vanilla --tensorboard --wandb
 ```
 ```
 bash scripts/run_cifar10c_vanilla.sh
@@ -105,10 +107,10 @@ bash scripts/run_cifar10c_vanilla.sh
 
 ##### Ours
 ```
-python train.py --dataset cifar10c --exp=cifar10c_0.5_ours --lr=0.0005 --percent=0.5pct --curr_step=10000 --lambda_dis_align=1 --lambda_swap_align=1 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
-python train.py --dataset cifar10c --exp=cifar10c_1_ours --lr=0.001 --percent=1pct --curr_step=10000 --lambda_dis_align=5 --lambda_swap_align=5 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
-python train.py --dataset cifar10c --exp=cifar10c_2_ours --lr=0.001 --percent=2pct --curr_step=10000 --lambda_dis_align=5 --lambda_swap_align=5 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
-python train.py --dataset cifar10c --exp=cifar10c_5_ours --lr=0.001 --percent=5pct --curr_step=10000 --lambda_dis_align=1 --lambda_swap_align=1 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
+python train.py --dataset cifar10c --exp=cifar10c_0.5_ours --lr=0.0005 --percent=0.5pct --curr_step=10000 --lambda_swap=1 --lambda_dis_align=1 --lambda_swap_align=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard --wandb
+python train.py --dataset cifar10c --exp=cifar10c_1_ours --lr=0.001 --percent=1pct --curr_step=10000 --lambda_swap=1 --lambda_dis_align=5 --lambda_swap_align=5 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard --wandb
+python train.py --dataset cifar10c --exp=cifar10c_2_ours --lr=0.001 --percent=2pct --curr_step=10000 --lambda_swap=1 --lambda_dis_align=5 --lambda_swap_align=5 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard --wandb
+python train.py --dataset cifar10c --exp=cifar10c_5_ours --lr=0.001 --percent=5pct --curr_step=10000 --lambda_swap=1 --lambda_dis_align=1 --lambda_swap_align=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard --wandb
 ```
 ```
 bash scripts/run_cifar10c_ours.sh
@@ -117,18 +119,18 @@ bash scripts/run_cifar10c_ours.sh
 #### BFFHQ
 ##### Vanilla
 ```
-python train.py --dataset bffhq --exp=bffhq_0.5_vanilla --lr=0.0001 --percent=0.5pct --train_vanilla --tensorboard
+python train.py --dataset bffhq --exp=bffhq_0.5_vanilla --lr=0.0001 --percent=0.5pct --train_vanilla --tensorboard --wandb
 ```
 ```
-bash scripts/run_bffhq_ours.sh
+bash scripts/run_bffhq_vanilla.sh
 ```
 
 ##### Ours
 ```
-python train.py --dataset bffhq --exp=bffhq_0.5_ours --lr=0.0001 --percent=0.5pct --lambda_main=1 --lambda_augment=0.1 --curr_step=10000 --use_lr_decay --lr_decay_step=10000 --lambda_align_main 2. --lambda_align_swap 2. --dataset bffhq --train_ours --tensorboard
+python train.py --dataset bffhq --exp=bffhq_0.5_ours --lr=0.0001 --percent=0.5pct --lambda_swap=0.1 --curr_step=10000 --use_lr_decay --lr_decay_step=10000 --lambda_dis_align 2. --lambda_swap_align 2. --dataset bffhq --train_ours --tensorboard --wandb
 ```
 ```
-bash scripts/run_bffhq_vanilla.sh
+bash scripts/run_bffhq_ours.sh
 ```
 
 ### Pretrained Models
@@ -148,7 +150,7 @@ We provide the pretrained models in the following urls. <br>
 [CIFAR10C 2pct](https://drive.google.com/drive/folders/1wLOI04vergYKtHCPkXQazxifNHTI-BRN?usp=sharing) <br>
 [CIFAR10C 5pct](https://drive.google.com/drive/folders/1zFU9saV4sVZ812FCKbORPrWD27CNc6sg?usp=sharing) <br>
 
-[BFFHQ 0.5pct](https://drive.google.com/drive/folders/1FA_afj_wogewS_XArD2sLSnMQhq1WRce?usp=sharing)
+[BFFHQ 0.5pct](https://drive.google.com/drive/folders/1VZ9y2gjUGQkgidvIsQGF3LaB8iMuupOR?usp=sharing)
 
 ### Citations
 Bibtex coming soon!
@@ -158,7 +160,7 @@ Bibtex coming soon!
 
 [Eungyeup Kim](mailto:eykim94@kaist.com)
 
-[Juyoung Lee](mailto:eykim94@kaist.com)
+[Juyoung Lee](mailto:michael.jy@kakaoenterprise.com)
 
 [Kakao Enterprise/Vision Team](mailto:vision.ai@kakaoenterprise.com)
 
