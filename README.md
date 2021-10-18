@@ -2,7 +2,8 @@
 This repository provides the official PyTorch implementation of the following paper:
 > Learning Debiased Representation via Disentangled Feature Augmentation <br>
 > [Jungsoo Lee](https://leebebeto.github.io/)* (KAIST AI, Kakao Enterprise), [Eungyeup Kim](https://eungyeupkim.github.io/)* (KAIST AI, Kakao Enterprise),<br>
-> [Juyoung Lee](https://sites.google.com/view/juyoung-lee) (Kakao Enterprise), [Jihyeon Lee](https://ginajihyeonlee.github.io/) (KAIST AI), and [Jaegul Choo](https://sites.google.com/site/jaegulchoo/) (KAIST AI) (*: equal contribution)<br>
+> [Juyoung Lee](https://sites.google.com/view/juyoung-lee) (Kakao Enterprise), [Jihyeon Lee](https://ginajihyeonlee.github.io/) (KAIST AI), and [Jaegul Choo](https://sites.google.com/site/jaegulchoo/) (KAIST AI) 
+> <br>(* indicates equal contribution. The order of first authors was chosen by tossing a coin.)<br>
 > NeurIPS 2021, Oral<br>
 
 > Paper: [Arxiv](https://arxiv.org/abs/2103.15597) <br>
@@ -81,10 +82,10 @@ bash scripts/run_cmnist_vanilla.sh
 
 ##### Ours
 ```
-python train.py --dataset cmnist --exp=cmnist_0.5_ours --lr=0.01 --percent=0.5pct --curr_step=10000 --lambda_augment=1 --lambda_align_main=10 --lambda_align_swap=10 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
-python train.py --dataset cmnist --exp=cmnist_1_ours --lr=0.01 --percent=1pct --curr_step=10000 --lambda_augment=1 --lambda_align_main=10 --lambda_align_swap=10 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
-python train.py --dataset cmnist --exp=cmnist_2_ours --lr=0.01 --percent=2pct --curr_step=10000 --lambda_augment=1 --lambda_align_main=10 --lambda_align_swap=10 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
-python train.py --dataset cmnist --exp=cmnist_5_ours --lr=0.01 --percent=5pct --curr_step=10000 --lambda_augment=1 --lambda_align_main=10 --lambda_align_swap=10 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
+python train.py --dataset cmnist --exp=cmnist_0.5_ours --lr=0.01 --percent=0.5pct --curr_step=10000 --lambda_dis_align=10 --lambda_swap_align=10 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
+python train.py --dataset cmnist --exp=cmnist_1_ours --lr=0.01 --percent=1pct --curr_step=10000 --lambda_dis_align=10 --lambda_swap_align=10 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
+python train.py --dataset cmnist --exp=cmnist_2_ours --lr=0.01 --percent=2pct --curr_step=10000 --lambda_dis_align=10 --lambda_swap_align=10 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
+python train.py --dataset cmnist --exp=cmnist_5_ours --lr=0.01 --percent=5pct --curr_step=10000 --lambda_dis_align=10 --lambda_swap_align=10 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
 ```
 ```
 bash scripts/run_cmnist_ours.sh
@@ -104,10 +105,10 @@ bash scripts/run_cifar10c_vanilla.sh
 
 ##### Ours
 ```
-python train.py --dataset cifar10c --exp=cifar10c_0.5_ours --lr=0.0005 --percent=0.5pct --curr_step=10000 --lambda_augment=1 --lambda_align_main=1 --lambda_align_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
-python train.py --dataset cifar10c --exp=cifar10c_1_ours --lr=0.001 --percent=1pct --curr_step=10000 --lambda_augment=1 --lambda_align_main=5 --lambda_align_swap=5 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
-python train.py --dataset cifar10c --exp=cifar10c_2_ours --lr=0.001 --percent=2pct --curr_step=10000 --lambda_augment=1 --lambda_align_main=5 --lambda_align_swap=5 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
-python train.py --dataset cifar10c --exp=cifar10c_5_ours --lr=0.001 --percent=5pct --curr_step=10000 --lambda_augment=1 --lambda_align_main=1 --lambda_align_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
+python train.py --dataset cifar10c --exp=cifar10c_0.5_ours --lr=0.0005 --percent=0.5pct --curr_step=10000 --lambda_dis_align=1 --lambda_swap_align=1 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
+python train.py --dataset cifar10c --exp=cifar10c_1_ours --lr=0.001 --percent=1pct --curr_step=10000 --lambda_dis_align=5 --lambda_swap_align=5 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
+python train.py --dataset cifar10c --exp=cifar10c_2_ours --lr=0.001 --percent=2pct --curr_step=10000 --lambda_dis_align=5 --lambda_swap_align=5 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
+python train.py --dataset cifar10c --exp=cifar10c_5_ours --lr=0.001 --percent=5pct --curr_step=10000 --lambda_dis_align=1 --lambda_swap_align=1 --lambda_swap=1 --use_lr_decay --lr_decay_step=10000 --lr_gamma=0.5 --train_ours --tensorboard
 ```
 ```
 bash scripts/run_cifar10c_ours.sh
