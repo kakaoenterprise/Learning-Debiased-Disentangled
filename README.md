@@ -2,7 +2,8 @@
 This repository provides the official PyTorch implementation of the following paper:
 > Learning Debiased Representation via Disentangled Feature Augmentation <br>
 > [Jungsoo Lee](https://leebebeto.github.io/)* (KAIST AI, Kakao Enterprise), [Eungyeup Kim](https://eungyeupkim.github.io/)* (KAIST AI, Kakao Enterprise),<br>
-> [Juyoung Lee](https://sites.google.com/view/juyoung-lee) (Kakao Enterprise), [Jihyeon Lee](https://ginajihyeonlee.github.io/) (KAIST AI), and [Jaegul Choo](https://sites.google.com/site/jaegulchoo/) (KAIST AI) (*: equal contribution)<br>
+> [Juyoung Lee](https://sites.google.com/view/juyoung-lee) (Kakao Enterprise), [Jihyeon Lee](https://ginajihyeonlee.github.io/) (KAIST AI), and [Jaegul Choo](https://sites.google.com/site/jaegulchoo/) (KAIST AI) 
+> <br>(* indicates equal contribution. The order of first authors was chosen by tossing a coin.)<br>
 > NeurIPS 2021, Oral<br>
 
 > Paper: [Arxiv](https://arxiv.org/abs/2103.15597) <br>
