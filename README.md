@@ -157,9 +157,9 @@ Bibtex coming soon!
 
 [Eungyeup Kim](mailto:eykim94@kaist.com)
 
-[Juyoung Lee](mailto:eykim94@kaist.com)
+[Juyoung Lee](mailto:michael.jy@kakaoenterprise.com)
 
-[Kakao Enterprise/Vision Team](mailto:vision.ai@kakaoenterprise.com)
+[Kakao Enterprise/Vision Team](mailto:vision.research@kakaoenterprise.com)
 
 ### Acknowledgments
 This work was mainly done when both of the first authors were doing internship at Kakao Enterprise, AI Lab. 
