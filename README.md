@@ -1,4 +1,4 @@
-##  Learning Debiased Representation via Disentangled Feature Augmentation: Official Project Webpage
+##  Learning Debiased Representation via Disentangled Feature Augmentation (Neurips 2021, Oral): Official Project Webpage
 This repository provides the official PyTorch implementation of the following paper:
 > Learning Debiased Representation via Disentangled Feature Augmentation <br>
 > [Jungsoo Lee](https://leebebeto.github.io/)* (KAIST AI, Kakao Enterprise), [Eungyeup Kim](https://eungyeupkim.github.io/)* (KAIST AI, Kakao Enterprise),<br>
