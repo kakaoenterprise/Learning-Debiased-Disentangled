@@ -98,7 +98,6 @@ class Learner(object):
         attr_dims.append(torch.max(train_target_attr).item() + 1)
         self.num_classes = attr_dims[0]
         self.train_dataset = IdxDataset(self.train_dataset)
-        self.valid_dataset = IdxDataset(self.valid_dataset)
 
         # make loader
         self.train_loader = DataLoader(
@@ -158,30 +157,9 @@ class Learner(object):
         self.best_valid_acc_d, self.best_test_acc_d = 0., 0.
         print('finished model initialization....')
 
-    # Validation set evaluation
+
+    # evaluation code for vanilla
     def evaluate(self, model, data_loader):
-        model.eval()
-        total_correct, total_num = 0, 0
-
-        for index, data, attr, _ in tqdm(data_loader, leave=False):
-            label = attr[:, self.args.target_attr_idx]
-            data = data.to(self.device)
-            label = label.to(self.device)
-            with torch.no_grad():
-
-                logit = model(data)
-                pred = logit.data.max(1, keepdim=True)[1].squeeze(1)
-                correct = (pred == label).long()
-                total_correct += correct.sum()
-                total_num += correct.shape[0]
-
-        accs = total_correct/float(total_num)
-        model.train()
-
-        return accs
-
-    # Unbiased test set (Bias-conflicting test set for BFFHQ) evaluation
-    def evaluate_test(self, model, data_loader):
         model.eval()
         total_correct, total_num = 0, 0
         for data, attr, index in tqdm(data_loader, leave=False):
@@ -201,48 +179,8 @@ class Learner(object):
 
         return accs
 
-    # Validation set evaluation (Ours)
-    def evaluate_ours(self, model_b, model_l, data_loader, model='label'):
-        model_b.eval()
-        model_l.eval()
-        total_correct, total_num = 0, 0
-
-        for index, data, attr, _ in tqdm(data_loader, leave=False):
-            label = attr[:, self.args.target_attr_idx]
-            # label = attr
-            data = data.to(self.device)
-            label = label.to(self.device)
-            with torch.no_grad():
-                if self.args.dataset == 'cmnist':
-                    z_l = model_l.extract(data)
-                    z_b = model_b.extract(data)
-                else:
-                    z_l, z_b = [], []
-                    hook_fn = self.model_l.avgpool.register_forward_hook(self.concat_dummy(z_l))
-                    _ = self.model_l(data)
-                    hook_fn.remove()
-                    z_l = z_l[0]
-                    hook_fn = self.model_b.avgpool.register_forward_hook(self.concat_dummy(z_b))
-                    _ = self.model_b(data)
-                    hook_fn.remove()
-                    z_b = z_b[0]
-                z_origin = torch.cat((z_l, z_b), dim=1)
-                if model == 'bias':
-                    pred_label = model_b.fc(z_origin)
-                else:
-                    pred_label = model_l.fc(z_origin)
-                pred = pred_label.data.max(1, keepdim=True)[1].squeeze(1)
-                correct = (pred == label).long()
-                total_correct += correct.sum()
-                total_num += correct.shape[0]
-
-        accs = total_correct/float(total_num)
-        model_b.train()
-        model_l.train()
-        return accs
-
-    # Unbiased test set (Bias-conflicting test set for BFFHQ) evaluation (Ours)
-    def evaluate_ours_test(self,model_b, model_l, data_loader, model='label'):
+    # evaluation code for ours
+    def evaluate_ours(self,model_b, model_l, data_loader, model='label'):
         model_b.eval()
         model_l.eval()
 
@@ -355,11 +293,7 @@ class Learner(object):
 
     def board_vanilla_acc(self, step, epoch, inference=None):
         valid_accs_b = self.evaluate(self.model_b, self.valid_loader)
-        test_accs_b = self.evaluate_test(self.model_b, self.test_loader)
-        if inference:
-            print(f'valid acc: {valid_accs_b} || test acc: {test_accs_b}')
-            import sys
-            sys.exit(0)
+        test_accs_b = self.evaluate(self.model_b, self.test_loader)
 
         print(f'epoch: {epoch}')
 
@@ -394,7 +328,7 @@ class Learner(object):
     def board_ours_acc(self, step, inference=None):
         # check label network
         valid_accs_d = self.evaluate_ours(self.model_b, self.model_l, self.valid_loader, model='label')
-        test_accs_d = self.evaluate_ours_test(self.model_b, self.model_l, self.test_loader, model='label')
+        test_accs_d = self.evaluate_ours(self.model_b, self.model_l, self.test_loader, model='label')
         if inference:
             print(f'test acc: {test_accs_d.item()}')
             import sys
