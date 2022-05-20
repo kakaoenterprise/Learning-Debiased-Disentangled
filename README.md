@@ -6,7 +6,7 @@ This repository provides the official PyTorch implementation of the following pa
 > <br>(* indicates equal contribution. The order of first authors was chosen by tossing a coin.)<br>
 > NeurIPS 2021, Oral<br>
 
-> Paper: [Arxiv](https://arxiv.org/abs/2103.15597) <br>
+> Paper: [Arxiv](https://arxiv.org/abs/2107.01372) <br>
 
 > **Abstract:** 
 *Image classification models tend to make decisions based on peripheral attributes of data items that have strong correlation with a target variable (i.e., dataset bias).
