@@ -153,7 +153,19 @@ We provide the pretrained models in the following urls. <br>
 [BFFHQ 0.5pct](https://drive.google.com/drive/folders/1VZ9y2gjUGQkgidvIsQGF3LaB8iMuupOR?usp=sharing)
 
 ### Citations
-Bibtex coming soon!
+
+### BibTeX
+```bibtex
+@inproceedings{NEURIPS2021_disentangled,
+ author = {Lee, Jungsoo and Kim, Eungyeup and Lee, Juyoung and Lee, Jihyeon and Choo, Jaegul},
+ booktitle = {Advances in Neural Information Processing Systems},
+ pages = {25123--25133},
+ title = {Learning Debiased Representation via Disentangled Feature Augmentation},
+ url = {https://proceedings.neurips.cc/paper/2021/file/d360a502598a4b64b936683b44a5523a-Paper.pdf},
+ volume = {34},
+ year = {2021}
+}
+```
 
 ### Contact
 [Jungsoo Lee](mailto:bebeto@kaist.com)
