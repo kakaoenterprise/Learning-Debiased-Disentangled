@@ -168,9 +168,9 @@ We provide the pretrained models in the following urls. <br>
 ```
 
 ### Contact
-[Jungsoo Lee](mailto:bebeto@kaist.com)
+[Jungsoo Lee](mailto:bebeto@kaist.ac.kr)
 
-[Eungyeup Kim](mailto:eykim94@kaist.com)
+[Eungyeup Kim](mailto:eykim94@kaist.ac.kr)
 
 [Juyoung Lee](mailto:michael.jy@kakaoenterprise.com)
 
